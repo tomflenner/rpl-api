@@ -13,7 +13,7 @@ func loadDotEnv() {
 	var err error = godotenv.Load(".env")
 
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Fatal("Error loading .env file: " + err.Error())
 	}
 }
 
@@ -22,21 +22,40 @@ func getConfigValue(key string) string {
 	value = os.Getenv(key)
 
 	if value == "" {
-		log.Fatal(fmt.Sprintf("Error loading %s from env", key))
+		log.Fatal(fmt.Sprintf("Error loading %s from env"))
 	}
 
 	return value
 }
 
-var Config models.Config
+var Cfg models.Config
 
 func InitializeConfig() {
 	loadDotEnv()
 
-	Config = models.Config{}
+	Cfg = models.Config{}
 
-	var port string
-	port = getConfigValue("PORT")
+	var apiPort string
+	apiPort = getConfigValue("API_PORT")
+	Cfg.ApiPort = apiPort
 
-	Config.PORT = port
+	var dbUser string
+	dbUser = getConfigValue("DB_USER")
+	Cfg.DbUser = dbUser
+
+	var dbPassword string
+	dbPassword = getConfigValue("DB_PASSWORD")
+	Cfg.DbPassword = dbPassword
+
+	var dbHost string
+	dbHost = getConfigValue("DB_HOST")
+	Cfg.DbHost = dbHost
+
+	var dbPort string
+	dbPort = getConfigValue("DB_PORT")
+	Cfg.DbPort = dbPort
+
+	var dbName string
+	dbName = getConfigValue("DB_NAME")
+	Cfg.DbName = dbName
 }
