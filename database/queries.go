@@ -2,6 +2,7 @@ package database
 
 import (
 	_ "embed"
+	"fmt"
 
 	"github.com/b4cktr4ck5r3/rpl-api/models"
 )
@@ -43,7 +44,7 @@ func SelectPlayers() (models.Players, error) {
 		)
 
 		if err != nil {
-			return result, err
+			fmt.Println("error: ", err.Error())
 		}
 
 		result.Players = append(result.Players, player)
