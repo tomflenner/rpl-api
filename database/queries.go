@@ -11,8 +11,8 @@ var (
 	queryPlayers string
 )
 
-func SelectPlayers() (models.Players, error) {
-	result := models.Players{}
+func SelectPlayers() ([]models.Player, error) {
+	result := []models.Player{}
 
 	rows, err := Db.Query(queryPlayers)
 
@@ -46,7 +46,7 @@ func SelectPlayers() (models.Players, error) {
 			break
 		}
 
-		result.Players = append(result.Players, player)
+		result = append(result, player)
 	}
 
 	return result, err

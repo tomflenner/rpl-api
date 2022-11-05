@@ -19,7 +19,3 @@ type Player struct {
 	Blind            int     `json:"blind"`
 	Wallbang         int     `json:"wallbang"`
 }
-
-type Players struct {
-	Players []Player `json:"players"`
-}
