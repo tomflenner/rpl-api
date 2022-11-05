@@ -9,4 +9,5 @@ func SetupRoutes(app *fiber.App) {
 	api := app.Group("/api")
 
 	api.Get("/version", handlers.GetVersion)
+	api.Get("/players", handlers.GetPlayers)
 }
