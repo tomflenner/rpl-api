@@ -36,3 +36,15 @@ func GetPlayerBySteamID(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(result)
 }
+
+func GetPlayersTop10ByKd(c *fiber.Ctx) error {
+	result, err := database.SelectPlayersTop10ByKd()
+
+	if err != nil {
+		return c.Status(500).JSON(&fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.Status(200).JSON(result)
+}
