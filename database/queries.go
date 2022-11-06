@@ -9,15 +9,18 @@ import (
 var (
 	//go:embed sql/selectplayers.sql
 	queryPlayers string
+
+	//go:embed sql/selectplayerbysteamid.sql
+	queryPlayerBySteamId string
 )
 
 func SelectPlayers() ([]models.Player, error) {
-	result := []models.Player{}
+	players := []models.Player{}
 
 	rows, err := Db.Query(queryPlayers)
 
 	if err != nil {
-		return result, err
+		return players, err
 	}
 
 	for rows.Next() {
@@ -46,8 +49,40 @@ func SelectPlayers() ([]models.Player, error) {
 			break
 		}
 
-		result = append(result, player)
+		players = append(players, player)
 	}
 
-	return result, err
+	return players, err
+}
+
+func SelectPlayerBySteamId(steamId string) (models.Player, error) {
+
+	row := Db.QueryRow(queryPlayerBySteamId, steamId)
+
+	player := models.Player{}
+	err := row.Scan(
+		&player.Id,
+		&player.SteamID,
+		&player.Name,
+		&player.Score,
+		&player.Rank,
+		&player.Mvp,
+		&player.Kills,
+		&player.Deaths,
+		&player.Ratio,
+		&player.Headshots,
+		&player.HeadshotsPercent,
+		&player.Assists,
+		&player.FlashAssists,
+		&player.NoScope,
+		&player.ThruSmoke,
+		&player.Blind,
+		&player.Wallbang,
+	)
+
+	if err != nil {
+		return player, err
+	}
+
+	return player, err
 }

@@ -15,4 +15,5 @@ SELECT id,
     thru_smoke,
     blind,
     wallbang 
-FROM rankme;
+FROM rankme
+WHERE steam = ?;
