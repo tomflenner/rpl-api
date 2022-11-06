@@ -15,6 +15,9 @@ var (
 
 	//go:embed sql/selectplayerstop10bykd.sql
 	queryPlayersTop10ByKd string
+
+	//go:embed sql/selectplayerstop10byhs.sql
+	queryPlayersTop10ByHs string
 )
 
 func SelectPlayers() ([]models.Player, error) {
@@ -94,6 +97,47 @@ func SelectPlayersTop10ByKd() ([]models.Player, error) {
 	players := []models.Player{}
 
 	rows, err := Db.Query(queryPlayersTop10ByKd)
+
+	if err != nil {
+		return players, err
+	}
+
+	for rows.Next() {
+		player := models.Player{}
+		err := rows.Scan(
+			&player.Id,
+			&player.SteamID,
+			&player.Name,
+			&player.Score,
+			&player.Rank,
+			&player.Mvp,
+			&player.Kills,
+			&player.Deaths,
+			&player.Ratio,
+			&player.Headshots,
+			&player.HeadshotsPercent,
+			&player.Assists,
+			&player.FlashAssists,
+			&player.NoScope,
+			&player.ThruSmoke,
+			&player.Blind,
+			&player.Wallbang,
+		)
+
+		if err != nil {
+			break
+		}
+
+		players = append(players, player)
+	}
+
+	return players, err
+}
+
+func SelectPlayersTop10ByHs() ([]models.Player, error) {
+	players := []models.Player{}
+
+	rows, err := Db.Query(queryPlayersTop10ByHs)
 
 	if err != nil {
 		return players, err

@@ -48,3 +48,15 @@ func GetPlayersTop10ByKd(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(result)
 }
+
+func GetPlayersTop10ByHs(c *fiber.Ctx) error {
+	result, err := database.SelectPlayersTop10ByHs()
+
+	if err != nil {
+		return c.Status(500).JSON(&fiber.Map{
+			"error": err.Error(),
+		})
+	}
+
+	return c.Status(200).JSON(result)
+}
