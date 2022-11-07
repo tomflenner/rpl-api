@@ -7,4 +7,5 @@ type Config struct {
 	DbHost     string
 	DbPort     string
 	DbName     string
+	JwtSecret  string
 }

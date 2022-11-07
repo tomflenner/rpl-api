@@ -3,10 +3,15 @@ module github.com/b4cktr4ck5r3/rpl-api
 go 1.19
 
 require (
-	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gofiber/fiber/v2 v2.39.0
 	github.com/joho/godotenv v1.4.0
+)
+
+require (
+	github.com/MrWaggel/gosteamconv v0.0.0-20190214041723-97e1fbb6de26
+	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/klauspost/compress v1.15.12 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect

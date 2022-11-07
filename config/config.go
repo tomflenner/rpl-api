@@ -58,4 +58,8 @@ func InitializeConfig() {
 	var dbName string
 	dbName = getConfigValue("DB_NAME")
 	Cfg.DbName = dbName
+
+	var jwtSecret string
+	jwtSecret = getConfigValue("JWT_SECRET")
+	Cfg.JwtSecret = jwtSecret
 }
