@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"regexp"
+
 	"github.com/MrWaggel/gosteamconv"
 	"github.com/b4cktr4ck5r3/rpl-api/models"
 	"github.com/b4cktr4ck5r3/rpl-api/utils"
@@ -13,6 +15,14 @@ func PostPayloadToMakeToken(c *fiber.Ctx) error {
 	if err := c.BodyParser(p); err != nil {
 		return c.Status(500).JSON(&fiber.Map{
 			"error": err.Error(),
+		})
+	}
+
+	r, _ := regexp.Compile(`^STEAM_[0-5]:[0-1]:[0-9]*$`)
+
+	if !r.MatchString(p.SteamID) {
+		return c.Status(500).JSON(&fiber.Map{
+			"error": "invalid steam id format",
 		})
 	}
 
