@@ -14,12 +14,14 @@ var Db *sql.DB
 func InitializeDatabaseConnection() {
 	var err error
 
-	Db, err = sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	connectionString := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		config.Cfg.DbUser,
 		config.Cfg.DbPassword,
 		config.Cfg.DbHost,
 		config.Cfg.DbPort,
-		config.Cfg.DbName))
+		config.Cfg.DbName)
+
+	Db, err = sql.Open("mysql", connectionString)
 
 	if err != nil {
 		log.Fatal("Error on database open connection: " + err.Error())
