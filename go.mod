@@ -9,9 +9,7 @@ require (
 )
 
 require (
-	github.com/MrWaggel/gosteamconv v0.0.0-20190214041723-97e1fbb6de26
 	github.com/andybalholm/brotli v1.0.4 // indirect
-	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/klauspost/compress v1.15.12 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
@@ -20,6 +18,5 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.41.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	golang.org/x/crypto v0.1.0
 	golang.org/x/sys v0.1.0 // indirect
 )
