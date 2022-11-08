@@ -35,27 +35,21 @@ func InitializeConfig() {
 
 	Cfg = models.Config{}
 
-	var apiPort string
-	apiPort = getConfigValue("API_PORT")
+	var apiPort string = getConfigValue("API_PORT")
 	Cfg.ApiPort = apiPort
 
-	var dbUser string
-	dbUser = getConfigValue("DB_USER")
+	var dbUser string = getConfigValue("DB_USER")
 	Cfg.DbUser = dbUser
 
-	var dbPassword string
-	dbPassword = getConfigValue("DB_PASSWORD")
+	var dbPassword string = getConfigValue("DB_PASSWORD")
 	Cfg.DbPassword = dbPassword
 
-	var dbHost string
-	dbHost = getConfigValue("DB_HOST")
+	var dbHost string = getConfigValue("DB_HOST")
 	Cfg.DbHost = dbHost
 
-	var dbPort string
-	dbPort = getConfigValue("DB_PORT")
+	var dbPort string = getConfigValue("DB_PORT")
 	Cfg.DbPort = dbPort
 
-	var dbName string
-	dbName = getConfigValue("DB_NAME")
+	var dbName string = getConfigValue("DB_NAME")
 	Cfg.DbName = dbName
 }
