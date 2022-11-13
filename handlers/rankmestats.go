@@ -1,7 +1,10 @@
 package handlers
 
 import (
+	"strconv"
+
 	"github.com/b4cktr4ck5r3/rpl-api/database"
+	"github.com/b4cktr4ck5r3/rpl-api/models"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -37,8 +40,15 @@ func GetPlayerBySteamID(c *fiber.Ctx) error {
 	return c.Status(200).JSON(result)
 }
 
-func GetPlayersTop10ByKd(c *fiber.Ctx) error {
-	result, err := database.SelectPlayersTop10ByKd()
+func GetPlayersTop(c *fiber.Ctx) error {
+	by := c.Query("by")
+
+	if by == "" {
+		return c.Status(400).JSON("Missing query params by=, for example /top?by=hs")
+	}
+
+	limit := c.Query("limit", "10")
+	intLimit, err := strconv.Atoi(limit)
 
 	if err != nil {
 		return c.Status(500).JSON(&fiber.Map{
@@ -46,11 +56,13 @@ func GetPlayersTop10ByKd(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Status(200).JSON(result)
-}
+	var result []models.Player
 
-func GetPlayersTop10ByHs(c *fiber.Ctx) error {
-	result, err := database.SelectPlayersTop10ByHs()
+	if by == "hs" {
+		result, err = database.SelectPlayersTopByHs(intLimit);
+	} else {
+		result, err = database.SelectPlayersTopByKd(intLimit);
+	}
 
 	if err != nil {
 		return c.Status(500).JSON(&fiber.Map{

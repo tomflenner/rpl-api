@@ -16,6 +16,6 @@ SELECT id,
     blind,
     wallbang 
 FROM rankme
-WHERE kills > 750
+WHERE kills > 100
 ORDER BY ratio DESC
-LIMIT 10;
+LIMIT ?;

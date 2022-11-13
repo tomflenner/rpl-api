@@ -16,6 +16,6 @@ SELECT id,
     blind,
     wallbang 
 FROM rankme
-WHERE kills > 750
+WHERE kills > 100
 ORDER BY headshots_percent DESC
-LIMIT 10;
+LIMIT ?;
