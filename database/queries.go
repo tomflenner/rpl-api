@@ -19,6 +19,9 @@ var (
 
 	//go:embed sql/selectplayerstopbyhs.sql
 	queryPlayersTopByHs string
+
+	//go:embed sql/selectplayerstopbyrank.sql
+	queryPlayersTopByRank string
 )
 
 func sqlRowToPlayer(row *sql.Row, player *models.Player) error {
@@ -156,4 +159,8 @@ func SelectPlayersTopByKd(limit int) ([]models.Player, error) {
 
 func SelectPlayersTopByHs(limit int) ([]models.Player, error) {
 	return processPlayersQueryWithLimit(queryPlayersTopByHs, limit)
+}
+
+func SelectPlayersTopByRank(limit int) ([]models.Player, error) {
+	return processPlayersQueryWithLimit(queryPlayersTopByRank, limit)
 }

@@ -44,7 +44,7 @@ func GetPlayersTop(c *fiber.Ctx) error {
 	by := c.Query("by")
 
 	if by == "" {
-		return c.Status(400).JSON("Missing query params by=, for example /top?by=hs")
+		return c.Status(400).JSON("Missing query params by=, use for example /top?by=hs")
 	}
 
 	limit := c.Query("limit", "10")
@@ -60,8 +60,12 @@ func GetPlayersTop(c *fiber.Ctx) error {
 
 	if by == "hs" {
 		result, err = database.SelectPlayersTopByHs(intLimit);
-	} else {
+	} else if by == "kd" {
 		result, err = database.SelectPlayersTopByKd(intLimit);
+	} else if by == "rank" {
+		result, err = database.SelectPlayersTopByRank(intLimit);
+	} else {
+		return c.Status(400).JSON("Unknown query params by=, use for example /top?by=hs")
 	}
 
 	if err != nil {
